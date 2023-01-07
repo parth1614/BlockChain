@@ -3,14 +3,14 @@ const SHA256 = require('crypto-js/sha256');
 
 class Block{
     
-    constructor(index,timestamp,data,previousHash=''){
+    constructor(index,timestamp,data,previousHash='', nonce = 0){
         
         this.index = index;
         this.timestamp = timestamp;
         this.data = data;
         this.previousHash = previousHash;
+        this.nonce = nonce;
         this.hash = this.calculateHash();
-        this.nonce = 0;
     }
     
     calculateHash(){
@@ -41,7 +41,7 @@ class BlockChain{
     }
     
     CreateGenisisBlock(){
-        return new Block(0,"02/04/2021","Genisis Block","0");
+        return new Block(0,"02/04/2021","Genisis Block","0", 0);
     }
     
     getLatestBlock(){
@@ -80,13 +80,13 @@ class BlockChain{
 let allegory = new BlockChain;
 
 console.log("Mining Block 1.....");
-allegory.addBlock(new Block(1,"05/04/2021",{amount:4}));
+allegory.addBlock(new Block(1,"05/04/2021",{amount:4}, '', 0));
 
 console.log("Mining Block 2.....");
-allegory.addBlock(new Block(2,"10/04/2021",{amount:16}));
+allegory.addBlock(new Block(2,"10/04/2021",{amount:16}, '', 0));
 
 console.log("Mining Block 3.....");
-allegory.addBlock(new Block(3,"16/04/2021",{amount:32}));
+allegory.addBlock(new Block(3,"16/04/2021",{amount:32}, '', 0));
 
 //console.log("Is blockChain Valid?" + " "+ allegory.isChainValid());
 
